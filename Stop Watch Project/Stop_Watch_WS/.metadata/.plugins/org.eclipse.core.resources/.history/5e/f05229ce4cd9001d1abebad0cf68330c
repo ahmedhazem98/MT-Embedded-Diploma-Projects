@@ -1,0 +1,38 @@
+/*
+ * StopWatch.c
+ *
+ *  Created on: Apr 12, 2023
+ *      Author: Ahmed Hazem
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+void Timer1_Init_CTC_Mode(void)
+{
+
+}
+
+void INT0_Init(void)
+{
+	MCUCR |= (1<<ISC01);		//Generates Request at Falling Edge
+	GICR |= (1<<INT0);			//Enable Module Interrupt (INT0)
+}
+
+void INT1_Init(void)
+{
+	MCUCR |= (1<<ISC10);		//Generates Request at Rising Edge
+	MCUCR |= (1<<ISC11);		//Generates Request at Rising Edge
+	GICR |= (1<<INT1);			//Enable Module Interrupt (INT1)
+
+}
+
+void INT2_Init(void)
+{
+
+	MCUCR &= ~(1<<ISC2);		//Generates Request at Falling Edge
+	GICR |= (1<<INT2);			//Enable Module Interrupt (INT2)
+}
+
+

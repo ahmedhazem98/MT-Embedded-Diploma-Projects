@@ -1,0 +1,183 @@
+/*
+ * StopWatch.c
+ *
+ *  Created on: Apr 12, 2023
+ *      Author: Ahmed Hazem
+ */
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+// Global Variables
+unsigned char Runningflag = 0;
+unsigned char Pauseflag = 0;
+unsigned char Resumeflag = 0;
+unsigned char secCount1 = 0;
+unsigned char secCount2 = 0;
+unsigned char minCount1 = 0;
+unsigned char minCount2 = 0;
+unsigned char hourCount1 = 0;
+unsigned char hourCount2 = 0;
+
+void Timer1_Init_CTC_Mode(void)
+{
+	/*For a stop watch, we want a timer resolution of 1 millisecond (ms)or less, for
+	 * resolution of 1ms we can use prescaler of 64, Timer Resolution = 1 / (1MHz * 64 * OCR1A) = 1ms
+	  Then OCR1A = (1 / (1MHz * 64)) * 1000 = 15.625 */
+
+	TCNT1 = 0;
+	OCR1A = 15625;
+	TIMSK |= (1<<OCIE1A);			  //Timer Interrupt Enable
+	TCCR1A = (1<<FOC1A) | (1<<FOC1B); // Non PWM
+	TCCR1B = (1<<WGM12) | (1<<CS11) | (1<<CS10); //Prescaler of 64, CTC
+
+
+}
+
+void INT0_Init(void)
+{
+	MCUCR |= (1<<ISC01);			//Generates Request at Falling Edge
+	GICR |= (1<<INT0);				//Enable Module Interrupt (INT0)
+}
+
+void INT1_Init(void)
+{
+	MCUCR |= (1<<ISC10);			//Generates Request at Rising Edge
+	MCUCR |= (1<<ISC11);			//Generates Request at Rising Edge
+	GICR |= (1<<INT1);				//Enable Module Interrupt (INT1)
+
+}
+
+void INT2_Init(void)
+{
+
+	MCUCR &= ~(1<<ISC2);			//Generates Request at Falling Edge
+	GICR |= (1<<INT2);				//Enable Module Interrupt (INT2)
+}
+
+ISR(TIMER1_COMPA_vect)
+{
+
+	Runningflag = 1;
+}
+
+ISR(INT0_vect)
+{
+	secCount1 = 0;
+    secCount2 = 0;
+	minCount1 = 0;
+
+
+	minCount2 = 0;
+	hourCount1 = 0;
+	hourCount2 = 0;
+}
+
+ISR(INT1_vect)
+{
+	TCCR1B &= 0xF8;
+	Pauseflag = 1;
+}
+
+ISR(INT2_vect)
+{
+	TCCR1B |= (1<<CS10) | (1<<CS12);
+	Resumeflag = 1;
+}
+
+int main(void)
+{
+	//PORTA
+	DDRA |= 0x3F;					// Configure PA0 => PA5 as Output pins
+	PORTA &= 0xC0;					// Clearing PA0 => PA5
+	//PORTB
+	DDRB  &= (~(1<<PB2));  			// Configure PB2 as input pin
+	PORTB |= (1<<PB2);    		    // Enable the internal pull up resistor at PB2 pin
+	//PORTC
+	DDRC |= 0x0F;					// Configure PC0 => PC3 as Output pins
+	PORTC &= 0xF0;					// Clearing PC0 => PC3
+	//PORTD
+	DDRD &= 0xF3;					// Configure PD2,PD3 as input pins
+	PORTD |= (1<<PD2);				//Internal Pull-up resistor Enable
+
+	SREG |= (1<<7);					//Global Interrupt Enable
+
+	INT0_Init();
+	INT1_Init();
+	INT2_Init();
+	Timer1_Init_CTC_Mode();
+
+	while(1)
+	{
+		if(Runningflag)
+		{
+			secCount1++;
+			if (secCount1 == 10)
+			{
+				secCount2++;
+				secCount1 = 0;
+			}
+			if(secCount2 == 6)
+			{
+				secCount2 = 0;
+				minCount1++;
+			}
+			if (minCount1 == 10)
+			{
+				minCount2++;
+				minCount1 = 0;
+			}
+			if (minCount2 == 6)
+			{
+				minCount2 = 0;
+				hourCount1++;
+			}
+			if (hourCount1 == 9)
+			{
+				hourCount2++;
+				hourCount1 = 0;
+			}
+
+			Runningflag = 0;
+		}
+		else
+		{
+			PORTA = (PORTA & 0xC0) | 0x01;
+			PORTC = (PORTC & 0xF0) | (secCount1 & 0x0F);
+			_delay_ms(1);
+
+			PORTA = (PORTA & 0xC0) | 0x02;
+			PORTC = (PORTC & 0xF0) | (secCount2 & 0x0F);
+			_delay_ms(1);
+
+			PORTA = (PORTA & 0xC0) | 0x04;
+			PORTC = (PORTC & 0xF0) | (minCount1 & 0x0F);
+			_delay_ms(1);
+
+			PORTA = (PORTA & 0xC0) | 0x08;
+			PORTC = (PORTC & 0xF0) | (minCount2 & 0x0F);
+			_delay_ms(1);
+
+			PORTA = (PORTA & 0xC0) | 0x10;
+			PORTC = (PORTC & 0xF0) | (hourCount1 & 0x0F);
+			_delay_ms(1);
+
+			PORTA = (PORTA & 0xC0) | 0x20;
+			PORTC = (PORTC & 0xF0) | (hourCount2 & 0x0F);
+			_delay_ms(1);
+		}
+
+		while(Pauseflag == 1)
+		{
+			if(Resumeflag == 1)
+			{
+				Resumeflag = 0;
+				Pauseflag = 0;
+			}
+		}
+
+	}
+
+}
+

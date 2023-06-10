@@ -1,0 +1,149 @@
+01:40:39 **** Clean-only build of configuration Debug for project CTRL_MC ****
+make clean 
+rm -rf  ./App.o ./UART.o ./buzzer.o ./external_eeprom.o ./gpio.o ./motor.o ./pwm.o ./timer.o ./twi.o  sizedummy  CTRL_MC.lss  ./App.d ./UART.d ./buzzer.d ./external_eeprom.d ./gpio.d ./motor.d ./pwm.d ./timer.d ./twi.d  CTRL_MC.elf
+ 
+01:40:41 **** Build of configuration Debug for project CTRL_MC ****
+make all 
+Building file: ../App.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"App.d" -MT"App.o" -c -o "App.o" "../App.c"
+In file included from ../App.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../App.c
+ 
+Building file: ../UART.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"UART.d" -MT"UART.o" -c -o "UART.o" "../UART.c"
+Finished building: ../UART.c
+ 
+Building file: ../buzzer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"buzzer.d" -MT"buzzer.o" -c -o "buzzer.o" "../buzzer.c"
+Finished building: ../buzzer.c
+ 
+Building file: ../external_eeprom.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"external_eeprom.d" -MT"external_eeprom.o" -c -o "external_eeprom.o" "../external_eeprom.c"
+../external_eeprom.c: In function 'EEPROM_writeByte':
+../external_eeprom.c:18: warning: implicit declaration of function 'TWI_start'
+Finished building: ../external_eeprom.c
+ 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+Finished building: ../gpio.c
+ 
+Building file: ../motor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"motor.d" -MT"motor.o" -c -o "motor.o" "../motor.c"
+Finished building: ../motor.c
+ 
+Building file: ../pwm.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"pwm.d" -MT"pwm.o" -c -o "pwm.o" "../pwm.c"
+Finished building: ../pwm.c
+ 
+Building file: ../timer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"timer.d" -MT"timer.o" -c -o "timer.o" "../timer.c"
+../timer.c: In function 'Timer1_setCallBack':
+../timer.c:99: warning: function return types not compatible due to 'volatile'
+Finished building: ../timer.c
+ 
+Building file: ../twi.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"twi.d" -MT"twi.o" -c -o "twi.o" "../twi.c"
+Finished building: ../twi.c
+ 
+Building target: CTRL_MC.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,CTRL_MC.map -mmcu=atmega32 -o "CTRL_MC.elf"  ./App.o ./UART.o ./buzzer.o ./external_eeprom.o ./gpio.o ./motor.o ./pwm.o ./timer.o ./twi.o   
+Finished building target: CTRL_MC.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S CTRL_MC.elf  >"CTRL_MC.lss"
+Finished building: CTRL_MC.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 CTRL_MC.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    9446 bytes (28.8% Full)
+(.text + .data + .bootloader)
+
+Data:        282 bytes (13.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+01:40:45 **** Clean-only build of configuration Debug for project HMI_MC ****
+make clean 
+rm -rf  ./APP.o ./UART.o ./gpio.o ./keypad.o ./lcd.o ./timer.o  sizedummy  HMI_MC.lss  ./APP.d ./UART.d ./gpio.d ./keypad.d ./lcd.d ./timer.d  HMI_MC.elf
+ 
+01:40:45 **** Build of configuration Debug for project HMI_MC ****
+make all 
+Building file: ../APP.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP.d" -MT"APP.o" -c -o "APP.o" "../APP.c"
+In file included from ../APP.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../APP.c
+ 
+Building file: ../UART.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"UART.d" -MT"UART.o" -c -o "UART.o" "../UART.c"
+Finished building: ../UART.c
+ 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+Finished building: ../gpio.c
+ 
+Building file: ../keypad.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"keypad.d" -MT"keypad.o" -c -o "keypad.o" "../keypad.c"
+Finished building: ../keypad.c
+ 
+Building file: ../lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"lcd.d" -MT"lcd.o" -c -o "lcd.o" "../lcd.c"
+In file included from ../lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../lcd.c: In function 'LCD_intgerToString':
+../lcd.c:145: warning: implicit declaration of function 'itoa'
+Finished building: ../lcd.c
+ 
+Building file: ../timer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"timer.d" -MT"timer.o" -c -o "timer.o" "../timer.c"
+../timer.c: In function 'Timer1_setCallBack':
+../timer.c:99: warning: function return types not compatible due to 'volatile'
+Finished building: ../timer.c
+ 
+Building target: HMI_MC.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,HMI_MC.map -mmcu=atmega32 -o "HMI_MC.elf"  ./APP.o ./UART.o ./gpio.o ./keypad.o ./lcd.o ./timer.o   
+Finished building target: HMI_MC.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S HMI_MC.elf  >"HMI_MC.lss"
+Finished building: HMI_MC.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 HMI_MC.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:   13328 bytes (40.7% Full)
+(.text + .data + .bootloader)
+
+Data:        210 bytes (10.3% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 

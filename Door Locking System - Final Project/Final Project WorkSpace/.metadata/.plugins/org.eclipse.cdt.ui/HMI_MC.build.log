@@ -1,0 +1,67 @@
+01:40:45 **** Build of configuration Debug for project HMI_MC ****
+make all 
+Building file: ../APP.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP.d" -MT"APP.o" -c -o "APP.o" "../APP.c"
+In file included from ../APP.c:14:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../APP.c
+ 
+Building file: ../UART.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"UART.d" -MT"UART.o" -c -o "UART.o" "../UART.c"
+Finished building: ../UART.c
+ 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+Finished building: ../gpio.c
+ 
+Building file: ../keypad.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"keypad.d" -MT"keypad.o" -c -o "keypad.o" "../keypad.c"
+Finished building: ../keypad.c
+ 
+Building file: ../lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"lcd.d" -MT"lcd.o" -c -o "lcd.o" "../lcd.c"
+In file included from ../lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../lcd.c: In function 'LCD_intgerToString':
+../lcd.c:145: warning: implicit declaration of function 'itoa'
+Finished building: ../lcd.c
+ 
+Building file: ../timer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"timer.d" -MT"timer.o" -c -o "timer.o" "../timer.c"
+../timer.c: In function 'Timer1_setCallBack':
+../timer.c:99: warning: function return types not compatible due to 'volatile'
+Finished building: ../timer.c
+ 
+Building target: HMI_MC.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,HMI_MC.map -mmcu=atmega32 -o "HMI_MC.elf"  ./APP.o ./UART.o ./gpio.o ./keypad.o ./lcd.o ./timer.o   
+Finished building target: HMI_MC.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S HMI_MC.elf  >"HMI_MC.lss"
+Finished building: HMI_MC.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 HMI_MC.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:   13328 bytes (40.7% Full)
+(.text + .data + .bootloader)
+
+Data:        210 bytes (10.3% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+01:40:47 Build Finished. 0 errors, 4 warnings. (took 1s.408ms)
+
