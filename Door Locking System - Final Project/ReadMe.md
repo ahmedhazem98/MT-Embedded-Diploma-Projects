@@ -14,5 +14,6 @@ model as follow:
 
 3)HMI_ECU is just responsible interaction with the user just take inputs through keypad and display
 messages on the LCD.
+
 4)CONTROL_ECU is responsible for all the processing and decisions in the system like password
-checking, open the door and activate the system alarm
+checking, open the door and activate the system alarm.
