@@ -10,6 +10,6 @@ HC-SR04 with the specifications listed below:
 
 4. The project should be design and implemented based on the layered architecture model as follow : 
 
-![Screenshot](Layered_Model.png)
+![Screenshot](Layered_Model.PNG)
 
 
